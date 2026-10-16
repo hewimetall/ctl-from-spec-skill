@@ -40,7 +40,7 @@ ask → endpoints → research → accept spec → plan
 5. **plan.** Tasks that close the gaps the spec names. The manager delegates writing the plan. A missing decision is a `Ruling` line in `docs/runtime/manifest.jsonl`. The run does not stop to ask.
 6. **implement.** Fan-out a batch of 20 SWE. One fresh SWE per task, on its own worktree. Inside the task, TDD. A Go change reads [go-quality.md](references/go-quality.md) and [go-testing.md](references/go-testing.md) first. Commands go through the Makefile in [scripts.md](references/scripts.md). Fan-in to the manager. Details: [sdd.md](references/sdd.md), [tdd.md](references/tdd.md).
 7. **review.** The manager delegates the judge. The judge reads the diff against the accepted spec. The rubric is [judges.md](references/judges.md). The SWE does not judge its own task. The manager does not judge it either. The judge does not walk urls or routers again.
-8. **check.** Status `succeeded` is written only by `script/checks/validate-result.sh` in the CLI project. This skill does not ship that script. A transition line in `docs/runtime/manifest.jsonl` is not `succeeded`. If the script is absent, the check stays `unknown` and nothing else writes `succeeded`.
+8. **check.** `make validate` runs `script/checks/validate-result.sh` in the CLI project. That script is the only writer of status `succeeded`. This skill does not ship it. A transition line in `docs/runtime/manifest.jsonl` is not `succeeded`. A `make test` pass is not `succeeded`. If the script is absent, the check stays `unknown` and nothing else writes `succeeded`.
 
 Chat is not state. The plan file and `docs/runtime/manifest.jsonl` are the record. A session todo list is a view of that plan, not a second record.
 

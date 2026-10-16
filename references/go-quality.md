@@ -46,7 +46,11 @@ A live check uses `make local-up`, then `CLI_CONFIG=.local/cli.yaml bin/<binary>
 
 ## Go gates
 
-Q1–Q4 are not defined in this skill; do not invent them. Any failure blocks the candidate. `make test` is the entry point. `make verify-openapi` needs a running stand, so when the stand is down that gate is `unknown`, not a skip and not a pass.
+Q1–Q4 are not defined in this skill; do not invent them. Any failure of an offline gate blocks the candidate. `make test` is the entry point.
+
+### Offline
+
+Run these before a candidate. They do not need the stand.
 
 | Gate | Expectation |
 |------|-------------|
@@ -56,9 +60,17 @@ Q1–Q4 are not defined in this skill; do not invent them. Any failure blocks th
 | `make test` | `go test ./...` passes |
 | `go test -race ./...` | Required where cgo and the race detector are available |
 | `govulncheck ./...` | Pinned version, no unfixed vulns in dependencies |
-| OpenAPI | `make generate-openapi` reproducible, `make verify-openapi` empty diff |
 | LSP | No new diagnostics when gopls is reachable |
 | Plane split | Public commands use the public client, internal commands use the `int` client |
+
+### Needs a stand
+
+| Gate | Expectation |
+|------|-------------|
+| `make generate-openapi` | Regenerates clients from the stand's runtime spec |
+| `make verify-openapi` | Empty diff against the committed clients |
+
+When the stand is down, these two are `unknown`, not a skip and not a pass.
 
 If the Makefile has `test` or `lint`, use that target. `golangci-lint run` only when the repository already has its config. Coverage is reported. There is no percentage threshold. Behavior and contract tests are the bar.
 
