@@ -9,7 +9,7 @@ This skill builds a CLI for a service. The service API is the contract. The CLI 
 
 The service repository that owns the API is not edited. Public and internal clients stay in separate directories. The internal client directory is not named `internal`. Generated files whose first line matches `^// Code generated .* DO NOT EDIT\.$` are regenerated, not edited by hand.
 
-A spec in `docs/superpowers/specs/` is accepted before any worker writes CLI code.
+A spec in `docs/superpowers/specs/` is accepted before any worker writes CLI code. `superpowers` is the Claude Code skill pack [obra/superpowers](https://github.com/obra/superpowers). Its subagent-driven-development skill keeps an accepted spec in that directory before workers write code. The name is the pack's namespace. It does not describe the endpoints.
 
 ## Manager
 

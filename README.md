@@ -21,7 +21,7 @@ ask → endpoints → research → accept spec → plan
 ```
 
 1. Name the service tree and how its API is known. Do not edit code yet.
-2. Write only the route table to `docs/superpowers/specs/endpoints.md`. One column scheme, a `base` line, and a slug that includes the method.
+2. Write only the route table to `docs/superpowers/specs/endpoints.md`. `superpowers` is the namespace of the Claude Code skill pack [obra/superpowers](https://github.com/obra/superpowers): that is where its subagent-driven-development skill puts an accepted spec. The name does not describe the routes. One column scheme, a `base` line, and a slug that includes the method.
 3. One research pass per row. Each file `docs/superpowers/specs/endpoints/<slug>.md` has `gap` and `constraints`. No language server does not skip the row.
 4. Accept that set. No worker writes CLI code before it is accepted.
 5. Plan the tasks that close the gaps the spec names.

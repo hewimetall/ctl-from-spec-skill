@@ -1,6 +1,8 @@
 # Endpoint table
 
-One file, `docs/superpowers/specs/endpoints.md`. A `base` line, then one table. No other prose.
+`superpowers` is the Claude Code skill pack [obra/superpowers](https://github.com/obra/superpowers). Subagent-driven-development in that pack stores the accepted spec under `docs/superpowers/specs/` before implementation starts. The directory name is that pack's namespace. It is not a property of the routes.
+
+The output file is `docs/superpowers/specs/endpoints.md`. A `base` line, then one table. No other prose in that file.
 
 ## Base
 
