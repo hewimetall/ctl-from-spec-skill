@@ -1,0 +1,19 @@
+name: plugin
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pack the skill as a Claude Code plugin
+        run: sh .github/pack-plugin.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ctl-from-spec-plugin
+          path: dist/ctl-from-spec-plugin.tar.gz
+          if-no-files-found: error

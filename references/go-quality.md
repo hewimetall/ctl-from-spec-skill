@@ -1,7 +1,7 @@
 ---
 name: go-quality
 description: >-
-  Enforces TDD and Q5 quality gates for handwritten Go in the CLI (commands,
+  Enforces TDD and the Go gates for handwritten Go in the CLI (commands,
   config, OpenAPI adapters, presenters, tests). Use when implementing or
   reviewing Go changes, regenerating OpenAPI clients, running make test, or
   before the candidate manifest. Generated clients are regenerate-only.
@@ -42,11 +42,11 @@ Published guides, not a local style invention: [Code Review Comments](https://go
 4. GREEN. `make test`.
 5. Diagnostics again when gopls is reachable.
 
-A live check, after the local stand is up: `make local-up`, then `CLI_CONFIG=.local/cli.yaml bin/<binary> ...`, then `make local-down`. `local-down` deletes stand data.
+A live check uses `make local-up`, then `CLI_CONFIG=.local/cli.yaml bin/<binary> ...`. Agents do not run `make local-down`. It deletes stand data. A human runs it after the check.
 
-## Q5
+## Go gates
 
-Any failure blocks the candidate. `make test` is the entry point.
+Q1–Q4 are not defined in this skill; do not invent them. Any failure blocks the candidate. `make test` is the entry point. `make verify-openapi` needs a running stand, so when the stand is down that gate is `unknown`, not a skip and not a pass.
 
 | Gate | Expectation |
 |------|-------------|

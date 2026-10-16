@@ -58,7 +58,7 @@ One binary. Commands cover the accepted rows: implemented, or named as skipped. 
 
 A constraint in `endpoints/<slug>.md` still holds in the diff. A gap is closed only when that row's spec told the worker to close it.
 
-Handwritten Go is TDD plus the Q5 gates: `gofmt`, `go vet`, pinned `staticcheck`, `make test`, `go test -race` where cgo exists, pinned `govulncheck`, `make verify-openapi`, gopls diagnostics, and the public/`int` client split. Generated clients are regenerated with `make generate-openapi`.
+The CLI this skill was extracted from is Go with Cobra (`make doc` runs `scripts/make_docs.go`). The Go gates and [go-testing.md](references/go-testing.md) apply only when the change is Go: `gofmt`, `go vet`, pinned `staticcheck`, `make test`, `go test -race` where cgo exists, pinned `govulncheck`, `make verify-openapi`, gopls diagnostics, and the public/`int` client split. Generated clients are regenerated with `make generate-openapi`. Q1–Q4 are not defined in this skill; do not invent them. `make verify-openapi` needs a running stand, so when the stand is down that gate is `unknown`, not a skip and not a pass. Another language uses that repository's own test command from [tdd.md](references/tdd.md) and does not inherit gofmt, staticcheck, govulncheck, or Cobra.
 
 Python e2e is a separate harness under `e2e/`. `make e2e-unit` is offline pytest. `make local-test` runs the built binary against the local stand. Agents do not run stage. [e2e-python.md](references/e2e-python.md).
 
@@ -70,13 +70,15 @@ One fresh SWE, one branch `agent/<run>/<role>/<task>`, one worktree `br/<run-id>
 
 Fan-out is 20 SWE in parallel. Fan-in returns their reports to the manager. The next batch starts only after that fan-in. Two SWE never edit the same files.
 
+`script/` is the harness inside the CLI project, singular: `script/checks/validate-result.sh` is the only writer of status `succeeded`; `script/harness/new-worktree.sh` is the only worktree creator. This skill does not ship either file. `scripts/` is the CLI project's own helpers, plural, called by the Makefile: `scripts/make_docs.go`, `scripts/local-up.sh`, `scripts/local-down.sh`, `scripts/fetch-openapi.sh`.
+
 ## References
 
 - [sdd.md](references/sdd.md) — manager delegates; SWE fan-out is a batch of 20
 - [tdd.md](references/tdd.md) — RED / GREEN / REFACTOR inside one task
 - [go-testing.md](references/go-testing.md) — Arrange, one Act, Assert for handwritten Go
-- [go-quality.md](references/go-quality.md) — Q5 gates, OpenAPI regenerate, local stand
-- [scripts.md](references/scripts.md) — Makefile targets and `scripts/`
+- [go-quality.md](references/go-quality.md) — Go gates, OpenAPI regenerate, local stand
+- [scripts.md](references/scripts.md) — Makefile targets, `script/`, and `scripts/`
 - [e2e-python.md](references/e2e-python.md) — pytest harness, offline unit and local stand
 - [endpoints.md](references/endpoints.md) — one table, base, slug, blast_radius fallback
 - [judges.md](references/judges.md) — the rubric for the CLI diff
